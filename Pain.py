@@ -4,11 +4,10 @@ def auth_require(func):
         name = input('Enter login: ')
         psw = input('Enter password: ')
         if name in creds and psw == creds[name]:
-            print('True')
+            @auth_require
+            def func(a, b):
+                return a + b       
         else:
             print('Authentication required')
     return wrapper_function
-@auth_require
-def func(a, b):
-    return a + b
 func(1, 2)
