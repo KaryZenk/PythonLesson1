@@ -5,5 +5,8 @@ def my_range(start=1):
         else: 
             yield start
         start += 1
-results = list(my_range(1, 7))
-print(f'results={results}')
+results = list(my_range())
+gen = my_range()
+i = input('Enter number, please: ')
+for i in range(i):
+    print(next(gen))
