@@ -6,5 +6,5 @@ def my_range(start, stop):
         else:
             yield i
         i += 1
-resutls = list(my_range(1, 7))
+results = list(my_range(1, 7))
 print(f'{results}')
