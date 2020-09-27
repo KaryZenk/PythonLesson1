@@ -7,4 +7,4 @@ def my_range(start, stop):
             yield i
         i += 1
 resutls = list(my_range(1, 7))
-print(f'{resutls}')
+print(f'{results}')
