@@ -10,11 +10,11 @@ BLOCK = 2*'\u2588'
 BLINK_FLAG = True
 
 
-def get_current_time():  # Create and return our laptop time
+def get_current_time():  # Create our laptop time
     return datetime.datetime.now()
 
 
-def merge_digits(*args):  # Create random to build str by str
+def merge_digits(*args):  # Loop from 5 iteration + merge with a loop
     result = ["", "", "", "", ""]
     for template in args:
         for i in range(5):
@@ -60,9 +60,9 @@ def sleep_for_a_while(period):  # Sleeping period
     time.sleep(period)
 
 
-if __name__ == "__main__":  # Create loop to draw our clock
+if __name__ == "__main__":
     colorama.init()
-    while True:
+    while True:  # Create loop to draw our clock
         current_time = get_current_time()
         print_digits(current_time)
         sleep_for_a_while(0.5)
