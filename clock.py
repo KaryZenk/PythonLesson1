@@ -3,117 +3,25 @@ from colorama import Fore, Back, Style
 import datetime
 import time
 import random
+from numbers import digits, semicolon, blank, blank_digit  # My dict + symbols
 
 BLOCK = 2*'\u2588'
-digits = {
-    0:
-    [
-        "000",
-        "0 0",
-        "0 0",
-        "0 0",
-        "000",
-    ],
-    1: [
-        "00 ",
-        " 0 ",
-        " 0 ",
-        " 0 ",
-        "000",
-    ],
-    2: [
-        "000",
-        "  0",
-        "000",
-        "0  ",
-        "000",
-    ],
-    3: [
-        "000",
-        "  0",
-        "000",
-        "  0",
-        "000",
-    ],
-    4: [
-        "0 0",
-        "0 0",
-        "000",
-        "  0",
-        "  0",
-    ],
-    5: [
-        "000",
-        "0  ",
-        "000",
-        "  0",
-        "000",
-    ],
-    6: [
-        "000",
-        "0  ",
-        "000",
-        "0 0",
-        "000",
-    ],
-    7: [
-        "000",
-        "  0",
-        "  0",
-        "  0",
-        "  0",
-    ],
-    8: [
-        "000",
-        "0 0",
-        "000",
-        "0 0",
-        "000",
-    ],
-    9: [
-        "000",
-        "0 0",
-        "000",
-        "  0",
-        "000",
-    ]
-}
-semicolon = [
-    "   ",
-    " 0 ",
-    "   ",
-    " 0 ",
-    "   "
-]
-blank = [
-    "   ",
-    "   ",
-    "   ",
-    "   ",
-    "   ",
-]
-blank_digit = [
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-]
+
 BLINK_FLAG = True
 
 
-def get_current_time():
+def get_current_time():  # Create and return our laptop time
     return datetime.datetime.now()
 
 
-def merge_digits(*args):
+def merge_digits(*args):  # Create random to build str by str
     result = ["", "", "", "", ""]
     for template in args:
         for i in range(5):
             result[i] += template[i]
     return result
 
-def print_digits(current_time):
+def print_digits(current_time):  # Return our digits from dict
     global BLINK_FLAG  # показывает, что это из глобальной области
     hour0 = digits[current_time.hour//10]
     hour1 = digits[current_time.hour%10]
@@ -133,10 +41,10 @@ def print_digits(current_time):
     )
     print_lines(clock)
 
-def color_generator():
+def color_generator():  # random color generator
     return random.choice([Fore.CYAN, Fore.GREEN, Fore.MAGENTA, Fore.RED])
 
-def print_lines(clock):
+def print_lines(clock):  # printing our lines
     print(color_generator())
     for clock_line in clock:
         rendered_line = clock_line.replace('0', BLOCK).replace(' ', 2*' ')
@@ -144,15 +52,15 @@ def print_lines(clock):
     print(Style.RESET_ALL)
 
 
-def clear_screen():
+def clear_screen():  # Clear screen
     print('\033[2J')
 
 
-def sleep_for_a_while(period):
+def sleep_for_a_while(period):  # Sleeping period
     time.sleep(period)
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # Create loop to draw our clock
     colorama.init()
     while True:
         current_time = get_current_time()
