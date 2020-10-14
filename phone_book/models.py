@@ -39,9 +39,9 @@ class User(Base):
         session.commit() 
 
     @classmethod
-    def delete(cls, name): 
-        session.query(cls).filter(User.name == name).delete()
-        session.commit() 
+    def delete(cls, user): 
+        session.query(cls).filter(User.name == user.name).delete()
+        session.commit()
 
     @classmethod
     def all(cls): 
@@ -65,5 +65,9 @@ class Phone(Base):
         session.commit()
         return phone
 
+    @classmethod
+    def delete(cls, user): 
+        session.query(cls).filter(Phone.user_id == user.id).delete()
+        session.commit()
 
 Base.metadata.create_all(engine)
