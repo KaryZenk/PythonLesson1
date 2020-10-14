@@ -48,6 +48,8 @@ def select_for_update_controller(data=None, cls=True):
     render_template(context={}, template="select_more.jinja2", cls=cls)
     user_name = input()
     user = User.select(user_name)
+    if user is None:
+        return 52, user_name
     return 31, user # (next state, data)
 
 
@@ -55,11 +57,17 @@ def select_user_controller(data=None, cls=True):
     render_template(context={}, template="select_more.jinja2", cls=cls)
     user_name = input()
     user = User.select(user_name)
+    if user is None:
+        return 52, user_name
     return 51, user # (next state, data)
 
+def empty_user_controller(user_name, cls=True):
+    render_template(context={'user_name': user_name}, template="empty_user_controller.jinja2", cls=cls)
+    input('Нажмите enter, чтобы продолжить')
+    return 'main', None # (next state, data)
 
 def show_user_controller(user, cls=True):
-    render_template(context={'user' :user}, template="show_user.jinja2", cls=cls)
+    render_template(context={'user': user}, template="show_user.jinja2", cls=cls)
     input('Нажмите enter, чтобы продолжить')
     return 'main', None # (next state, data)
 
@@ -84,6 +92,8 @@ def delete_user_controller(data=None, cls=True):
     render_template(context={}, template="delete_user.jinja2", cls=cls)
     user_name = input()
     user = User.select(user_name)
+    if user is None:
+        return 52, user_name
     User.delete(user)
     Phone.delete(user)
     return 'main', None # (next state, data)
@@ -103,5 +113,6 @@ controllers_dict = { # use dict type instead of if else chain
     212: add_more_controller,
     31: update_user_controller,
     51: show_user_controller,
-    511: show_updated_user_controller
+    511: show_updated_user_controller,
+    52: empty_user_controller
 }
