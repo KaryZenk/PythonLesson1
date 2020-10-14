@@ -16,6 +16,7 @@ while True:
     if ans.lower() != 'y':
         break
 
+
 for user in users: 
     print("Ваше имя: {name}\nВаш возраст: {age}\nВаш гендер: {gender}\nМасса: {weight}\nРост: {height}".format(**user))
     bmi = int(weight//((height/100)*(height/100)))
