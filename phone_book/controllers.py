@@ -46,28 +46,30 @@ def add_more_controller(user, cls=True):
 
 def select_for_update_controller(data=None, cls=True):
     render_template(context={}, template="select_more.jinja2", cls=cls)
-    user = input()
+    user_name = input()
+    user = User.select(user_name)
     return 31, user # (next state, data)
 
 
 def select_user_controller(data=None, cls=True):
     render_template(context={}, template="select_more.jinja2", cls=cls)
-    user = input()
+    user_name = input()
+    user = User.select(user_name)
     return 51, user # (next state, data)
 
 
-def show_user_controller(user_name, cls=True):
-    user = User.select(user_name)
-    render_template(context={'user':user}, template="show_user.jinja2", cls=cls)
+def show_user_controller(user, cls=True):
+    render_template(context={'user' :user}, template="show_user.jinja2", cls=cls)
     input('Нажмите enter, чтобы продолжить')
     return 'main', None # (next state, data)
 
 
-def update_user_controller(old_name, cls=True):
+def update_user_controller(user, cls=True):
     render_template(context={}, template="update_user.jinja2", cls=cls)
     new_name = input()
-    User.update(old_name, new_name)
-    return 51, new_name # (next state, data)
+    User.update(user.name, new_name)
+    return 51, user # (next state, data)
+
 
 def delete_user_controller(data=None, cls=True):
     render_template(context={}, template="delete_user.jinja2", cls=cls)
